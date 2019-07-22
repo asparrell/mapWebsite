@@ -35,13 +35,12 @@ def extract_location() -> dict:
     for file in filenames:
         latlong = place_code_to_lat_long[file[:7]]  # this indexing won't work for files that have two-digit numbers in the code
         filename_to_latlong[file] = latlong
-    print(filename_to_latlong, file=sys.stderr)
     return filename_to_latlong
             
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
     filename_to_latlong = extract_location()
-    location = filename_to_latlong[filename[:7]]
+    location = filename_to_latlong[filename]
     name = filename[:-5]
     marker = folium.Marker(location, popup=name, tooltip='site name, derived from separate location')
 
