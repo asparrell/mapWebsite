@@ -8,7 +8,8 @@ import sys
 @app.route('/index')
 def index():
     m = folium.Map(min_zoom=2, max_zoom=14, zoom_start=2)
-    make_marker()
+    marker = make_marker()
+    marker.add_to(m)
     #folium.Marker([42.4709, -70.9176], popup='<i>Ralphy Baby Lives Here!!</i>', tooltip="Click Me!").add_to(m)
     m.save('./app/templates/map.html')
     return render_template('index.html', title='Map Home')
@@ -40,7 +41,7 @@ def make_marker():
     for entry in latlong_dict:
         location = latlong_dict[entry]
         name = entry
-        folium.Marker(location, popup=name, tooltip='site name, derived from separate location').add_to(m)
-
+        marker = folium.Marker(location, popup=name, tooltip='site name, derived from separate location')
+    return marker
 
 # print("", file=sys.stderr)
