@@ -16,7 +16,7 @@ def index():
     m.save('./app/templates/map.html')
     return render_template('index.html', title='Map Home')
 
-place_code_to_lat_long = {'2.1.1.2': [53.726669, -127.647621], '2.1.1.8': [51.253777, -85.323212]}
+place_code_to_lat_long = {'2.1.1.2': [53.726669, -127.647621], '2.1.1.8': [51.253777, -85.323212], '2.2.5.0': [18.928371, -70.384653]}
 
 
 def get_filenames() -> list:
