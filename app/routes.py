@@ -12,8 +12,8 @@ def index():
     for file in filenames:
         marker = make_marker(file)
         marker.add_to(m)
-    #folium.Marker([42.4709, -70.9176], popup='<i>Ralphy Baby Lives Here!!</i>', tooltip="Click Me!").add_to(m)
     m.save('./app/templates/map.html')
+
     return render_template('index.html', title='Map Home')
 
 place_code_to_lat_long = {'2.1.1.2': [53.726669, -127.647621], '2.1.1.8': [51.253777, -85.323212], '2.2.5.0': [18.928371, -70.384653]}
@@ -32,16 +32,16 @@ def extract_location() -> dict:
     # Get latlong coordinates from filename for each file
     filenames = get_filenames()
     filename_to_latlong = {}
-    for name in filenames:
-        # this indexing won't work for files that have two-digit numbers in the code
-        latlong = place_code_to_lat_long[name[:7]]
-        filename_to_latlong[name] = latlong
+    for file in filenames:
+        latlong = place_code_to_lat_long[file[:7]]  # this indexing won't work for files that have two-digit numbers in the code
+        filename_to_latlong[file] = latlong
+    print(filename_to_latlong, file=sys.stderr)
     return filename_to_latlong
             
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
-    latlong_dict = extract_location()
-    location = latlong_dict[filename[:7]]
+    filename_to_latlong = extract_location()
+    location = filename_to_latlong[filename[:7]]
     name = filename[:-5]
     marker = folium.Marker(location, popup=name, tooltip='site name, derived from separate location')
 
