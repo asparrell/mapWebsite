@@ -32,7 +32,7 @@ def extract_location() -> dict:
     for name in filenames:
         if name[:7:2].isnumeric():
             latlong = place_code_to_lat_long[name[:7]]
-            latlong_list[name] = latlong
+            filename_to_latlong[name] = latlong
     return filename_to_latlong
             
 def make_marker():
@@ -43,4 +43,4 @@ def make_marker():
         folium.Marker(location, popup=name, tooltip='site name, derived from separate location').add_to(m)
 
 
-# file=sys.stderr
+# print("", file=sys.stderr)
