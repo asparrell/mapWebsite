@@ -13,7 +13,14 @@ def index():
     filenames = get_filenames()
     for file in filenames:
         marker = make_marker(file)
-        marker_list.append(marker)
+        if marker.location in marker_list:
+            filename_to_latlong = extract_location()
+            location = filename_to_latlong[filename]
+            location[0] += 5
+            location[1] += 5
+            name = filename[:-5]            
+            marker = folium.Marker(location, popup=name, tooltip='site name, derived from separate location')
+        marker_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
     print(marker_list)
@@ -37,7 +44,8 @@ def extract_location() -> dict:
     filenames = get_filenames()
     filename_to_latlong = {}
     for file in filenames:
-        latlong = place_code_to_lat_long[file[:7]]  # this indexing won't work for files that have two-digit numbers in the code
+        file_code = file[:file.find(' ')]
+        latlong = place_code_to_lat_long[file_code]  # this indexing won't work for files that have two-digit numbers in the code
         filename_to_latlong[file] = latlong
     return filename_to_latlong
 
