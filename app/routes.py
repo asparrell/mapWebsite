@@ -23,11 +23,10 @@ def index():
         marker_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
-    print(marker_list)
 
     return render_template('index.html', title='Map Home')
 
-place_code_to_lat_long = {'2.1.1.2': [53.726669, -127.647621], '2.1.1.8': [51.253777, -85.323212], '2.2.5.0': [18.928371, -70.384653]}
+place_code_to_lat_long = {'2.1.1.1': [55.017001, -114.930192], '2.1.1.2': [55.268163, -124.945342], '2.1.1.4': [55.079546, -97.449267], '2.1.1.7': [45.067580, -63.157430], '2.1.1.10': [51.253777, -85.323212], '2.1.1.13': [54.588975, -105.862449], '2.2.5.0': [18.928371, -70.384653]}
 
 
 def get_filenames() -> list:
