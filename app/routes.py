@@ -9,11 +9,14 @@ import sys
 @app.route('/index')
 def index():
     m = folium.Map(min_zoom=2, max_zoom=14, zoom_start=2)
+    marker_list = []
     filenames = get_filenames()
     for file in filenames:
         marker = make_marker(file)
+        marker_list.append(marker)
         marker.add_to(m)
     m.save('./app/templates/map.html')
+    print(marker_list)
 
     return render_template('index.html', title='Map Home')
 
@@ -38,12 +41,12 @@ def extract_location() -> dict:
         filename_to_latlong[file] = latlong
     return filename_to_latlong
 
-def extract_filedata():
-    filenames = get_filenames()
-    for file in filenames:
-        file_obj = open(file)
-        html_file = mammoth.convert_to_html(file_obj)
-        print(html_file)
+# def extract_filedata():
+    #filenames = get_filenames()
+    # for file in filenames:
+        #file_obj = open(file)
+        #html_file = mammoth.convert_to_html(file_obj)
+        # print(html_file)
 
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
@@ -54,6 +57,6 @@ def make_marker(filename: str):
 
     return marker
 
-extract_filedata()
+# extract_filedata()
 
 # print("", file=sys.stderr)
