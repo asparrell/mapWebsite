@@ -16,8 +16,8 @@ def index():
         if marker.location in marker_list:
             filename_to_latlong = extract_location()
             location = filename_to_latlong[file]
-            location[0] += 5
-            location[1] += 5
+            location[0] += 1
+            location[1] += 1
             name = file[:-5]
             marker = folium.Marker(location, popup=name, tooltip='site name, derived from separate location')
         marker_list.append(marker.location)
