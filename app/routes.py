@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template
 import folium
+import mammoth
 import os
 import sys
 
@@ -36,7 +37,14 @@ def extract_location() -> dict:
         latlong = place_code_to_lat_long[file[:7]]  # this indexing won't work for files that have two-digit numbers in the code
         filename_to_latlong[file] = latlong
     return filename_to_latlong
-            
+
+def extract_filedata():
+    filenames = get_filenames()
+    for file in filenames:
+        file_obj = open(file)
+        html_file = mammoth.convert_to_html(file_obj)
+        print(html_file)
+
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
     filename_to_latlong = extract_location()
@@ -45,5 +53,7 @@ def make_marker(filename: str):
     marker = folium.Marker(location, popup=name, tooltip='site name, derived from separate location')
 
     return marker
+
+extract_filedata()
 
 # print("", file=sys.stderr)
