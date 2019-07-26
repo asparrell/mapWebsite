@@ -48,13 +48,6 @@ def extract_location() -> dict:
         filename_to_latlong[file] = latlong
     return filename_to_latlong
 
-# def extract_filedata():
-    #filenames = get_filenames()
-    # for file in filenames:
-        #file_obj = open(file)
-        #html_file = mammoth.convert_to_html(file_obj)
-        # print(html_file)
-
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
     filename_to_latlong = extract_location()
@@ -64,6 +57,5 @@ def make_marker(filename: str):
 
     return marker
 
-# extract_filedata()
 
 # print("", file=sys.stderr)
