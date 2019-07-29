@@ -29,7 +29,7 @@ def index():
 
 place_code_to_lat_long = {'2.1.1.1': [55.017001, -114.930192], '2.1.1.2': [55.268163, -124.945342], '2.1.1.4': [55.079546, -97.449267], '2.1.1.7': [45.067580, -63.157430], '2.1.1.10': [51.253777, -85.323212], '2.1.1.13': [54.588975, -105.862449], '2.2.5.0': [18.928371, -70.384653]}
 
-PATH = '/home/ubuntu/rock_art_html/'
+PATH = '/home/ubuntu/rock_art_files/'
 
 def get_filenames() -> list:
     # List all files in the rock_art_files directory; will have to sort by .html
