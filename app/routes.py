@@ -93,7 +93,7 @@ def get_url() -> list:
         url_list.append(url_for(PATH, file))
     print(url_list)
     return url_list
-
+get_url()
 
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
