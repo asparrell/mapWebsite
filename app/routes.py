@@ -99,7 +99,7 @@ def make_marker(filename: str):
     location = file_to_coords[filename]
     index = filename.rfind("-")
     name = filename[index + 1:-5]    
-    marker = folium.Marker(location, popup='<a href="' + url + '" target="_blank">' + name + '</a>', tooltip=name)
+    marker = folium.Marker(location, popup='<a href="http://sparrell.com/" target="_blank">' + name + '</a>', tooltip=name)
 
     return marker
 
