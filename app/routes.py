@@ -51,25 +51,23 @@ def extract_filename_location() -> dict:
         filename_to_latlong[file] = latlong
     return filename_to_latlong
 
-def make_file_to_coord_dict() -> dict:
-    filenames = get_filenames()
+def make_file_to_coord_dict(file: str) -> dict:
     filename_to_coordinates = {}
-    for file in filenames:
-        path = PATH + file
-        with open(path) as f:
-            file_data = f.read()
-        start_index = file_data.find('oordinates')
-        if start_index != -1:
-            data_slice = file_data[start_index: start_index + 50]
-            index1 = data_slice.find('>')
-            index2 = data_slice.find('<', index1)
-            coordinates = data_slice[index1 + 1:index2].strip()
-            coords = format_coords(coordinates)
-            filename_to_coordinates[file] = coords
-        else:
-            filename_to_latlong = extract_filename_location()
-            location = filename_to_latlong[file]
-            filename_to_coordinates[file] = location
+    path = PATH + file
+    with open(path) as f:
+        file_data = f.read()
+    start_index = file_data.find('oordinates')
+    if start_index != -1:
+        data_slice = file_data[start_index: start_index + 50]
+        index1 = data_slice.find('>')
+        index2 = data_slice.find('<', index1)
+        coordinates = data_slice[index1 + 1:index2].strip()
+        coords = format_coords(coordinates)
+        filename_to_coordinates[file] = coords
+    else:
+        filename_to_latlong = extract_filename_location()
+        location = filename_to_latlong[file]
+        filename_to_coordinates[file] = location
 
     return filename_to_coordinates
 
@@ -87,7 +85,7 @@ def format_coords(coordinates: str) -> list:
 
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
-    file_to_coords = make_file_to_coord_dict()
+    file_to_coords = make_file_to_coord_dict(filename)
     location = file_to_coords[filename]
     name = filename[:-5]
     marker = folium.Marker(location, popup=name, tooltip=name)
