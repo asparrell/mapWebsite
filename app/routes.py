@@ -87,7 +87,8 @@ def format_coords(coordinates: str) -> list:
 
 
 def get_url(file: str) -> list:
-        url = (url_for('static', filename=file))
+    url = (url_for('static', filename=file))
+    
     return url
 
 
