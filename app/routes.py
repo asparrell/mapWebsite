@@ -9,19 +9,16 @@ import sys
 @app.route('/index')
 def index():
     m = folium.Map(min_zoom=2, max_zoom=14, zoom_start=2)
-    marker_list = []
+    location_list = []
     filenames = get_filenames()
     for file in filenames:
         marker = make_marker(file)
-        # if marker.location in marker_list:
-            # will need to change the next two lines to reflect new data
-            #filename_to_latlong = extract_location()
-            #location = filename_to_latlong[file]
-            # location[0] += 0.1  # will lessen this increment
-            #location[1] += 0.1
+        if marker.location in location_list:
+            marker.location[0] += 0.01  # will lessen this increment
+            marker.location[1] += 0.01
             #name = file[:-5]
             #marker = folium.Marker(location, popup=name, tooltip=name)
-        marker_list.append(marker.location)
+        location_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
 
