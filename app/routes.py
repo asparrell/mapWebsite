@@ -19,6 +19,7 @@ def index():
             #name = file[:-5]
             #marker = folium.Marker(location, popup=name, tooltip=name)
         location_list.append(marker.location)
+        print(location_list)
         marker.add_to(m)
     m.save('./app/templates/map.html')
 
