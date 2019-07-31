@@ -26,6 +26,7 @@ def index():
         location_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
+    get_url()
 
     return render_template('index.html', title='Map Home')
 
@@ -73,7 +74,6 @@ def make_file_to_coord_dict(file: str) -> dict:
 
     return filename_to_coordinates
 
-
 def format_coords(coordinates: str) -> list:
     # changes coordinate string to float list
     coords = []
@@ -85,6 +85,15 @@ def format_coords(coordinates: str) -> list:
     coords.append(long)
     
     return coords
+
+
+def get_url() -> list:
+    url_list = []
+    filenames = get_filenames()
+    for file in filenames:
+        url_list.append(url_for('static', filename=file))
+    print(url_list)
+    return url_list
 
 
 def make_marker(filename: str):
