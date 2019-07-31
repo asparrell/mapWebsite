@@ -90,7 +90,7 @@ def get_url() -> list:
     url_list = []
     filenames = get_filenames()
     for file in filenames:
-        url_list.append(url_for(PATH, file))
+        url_list.append(url_for(PATH, filename=file))
     print(url_list)
     return url_list
 get_url()
