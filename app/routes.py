@@ -13,9 +13,10 @@ def index():
     filenames = get_filenames()
     for file in filenames:
         marker = make_marker(file)
-        if marker.location in location_list:
+        while marker.location in location_list:
             marker.location[0] += 0.01  # will lessen this increment
             marker.location[1] += 0.01
+            location_list.append(marker.location)
             #name = file[:-5]
             #marker = folium.Marker(location, popup=name, tooltip=name)
         location_list.append(marker.location)
