@@ -86,18 +86,14 @@ def format_coords(coordinates: str) -> list:
     return coords
 
 
-def get_url() -> list:
-    url_list = []
-    filenames = get_filenames()
-    for file in filenames:
-        url_list.append(url_for('static', filename=file))
-    print(url_list)
-    return url_list
+def get_url(file: str) -> list:
+        url = (url_for('static', filename=file))
+    return url
 
 
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
-    url = get_url()
+    url = get_url(filename)
     file_to_coords = make_file_to_coord_dict(filename)
     location = file_to_coords[filename]
     index = filename.rfind("-")
