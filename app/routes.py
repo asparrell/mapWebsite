@@ -26,7 +26,6 @@ def index():
         location_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
-    get_url()
 
     return render_template('index.html', title='Map Home')
 
@@ -98,11 +97,12 @@ def get_url() -> list:
 
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
+    url = get_url()
     file_to_coords = make_file_to_coord_dict(filename)
     location = file_to_coords[filename]
     index = filename.rfind("-")
     name = filename[index + 1:-5]    
-    marker = folium.Marker(location, popup=name, tooltip=name)
+    marker = folium.Marker(location, popup='<a href="' + url + '" target="_blank">' + name + '</a>', tooltip=name)
 
     return marker
 
