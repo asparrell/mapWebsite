@@ -26,6 +26,7 @@ def index():
         location_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
+    get_url()
 
     return render_template('index.html', title='Map Home')
 
@@ -93,7 +94,7 @@ def get_url() -> list:
         url_list.append(url_for(PATH, filename=file))
     print(url_list)
     return url_list
-get_url()
+
 
 def make_marker(filename: str):
     # return a Marker object with the properties of a file
