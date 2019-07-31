@@ -86,12 +86,13 @@ def format_coords(coordinates: str) -> list:
     return coords
 
 
-def get_url():
+def get_url() -> list:
     url_list = []
     filenames = get_filenames()
     for file in filenames:
         url_list.append(url_for(PATH, file))
     print(url_list)
+    return url_list
 
 
 def make_marker(filename: str):
