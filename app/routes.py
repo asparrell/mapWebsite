@@ -21,6 +21,7 @@ def index():
         location_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
+    print(location_list)
 
     return render_template('index.html', title='Map Home')
 
