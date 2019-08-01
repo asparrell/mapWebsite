@@ -61,15 +61,13 @@ def make_file_to_coord_dict(file: str) -> dict:
     start_index = file_data.find('oordinates')
     if start_index != -1:
         data_slice = file_data[start_index: start_index + 50]
-        index1 = data_slice.find('>')
-        index2 = data_slice.find('<', index1)
-        coordinates = data_slice[index1 + 1:index2].strip()
-        coords = format_coords(coordinates)
+        coordinates = re.findall(r'[-]?\d+\.?\d*, [-]?\d+\.?\d*', data_slice)
+        coords = format_coords(coordinates[0])
         filename_to_coordinates[file] = coords
     else:
-        filename_to_latlong = extract_filename_location()
-        location = filename_to_latlong[file]
-        filename_to_coordinates[file] = location
+        filename_to_latlong=extract_filename_location()
+        location=filename_to_latlong[file]
+        filename_to_coordinates[file]=location
 
     return filename_to_coordinates
 
