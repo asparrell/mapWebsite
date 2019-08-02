@@ -14,6 +14,7 @@ PATH = '/home/ubuntu/mapWebsite/app/static/'
 
 @app.route('/')
 @app.route('/index')
+@app.before_first_request
 def index():
     # create map, populate with markers, and offset overlapping markers
     m = folium.Map(min_zoom=2, max_zoom=14, zoom_start=2)
@@ -88,7 +89,7 @@ def format_coords(coordinates: str) -> list:
 def get_url(file: str) -> list:
     url = (url_for('static', filename=file))
     
-    return url  # incomplete url
+    return url
 
 
 def make_marker(filename: str):
