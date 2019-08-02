@@ -15,6 +15,7 @@ PATH = '/home/ubuntu/mapWebsite/app/static/'
 @app.route('/')
 @app.route('/index')
 def index():
+    print("Page initiated")
     return render_template('index.html', title='Map Home')
 
 @app.before_first_request
