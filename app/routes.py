@@ -15,7 +15,6 @@ PATH = '/home/ubuntu/mapWebsite/app/static/'
 @app.route('/')
 @app.route('/index')
 def index():
-    print("Page initiated")
     return render_template('index.html', title='Map Home')
 
 @app.before_first_request
@@ -32,6 +31,7 @@ def init_map():
         location_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
+    print("Page initiated")
 
 
 def get_filenames() -> list:
