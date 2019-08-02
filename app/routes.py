@@ -20,6 +20,7 @@ def index():
 @app.before_first_request
 def init_map():
     # create map, populate with markers, and offset overlapping markers
+    print("Page initiated")
     m = folium.Map(min_zoom=2, max_zoom=14, zoom_start=2)
     location_list = []
     filenames = get_filenames()
@@ -31,7 +32,6 @@ def init_map():
         location_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
-    print("Page initiated")
 
 
 def get_filenames() -> list:
