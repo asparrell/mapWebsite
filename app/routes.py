@@ -14,8 +14,11 @@ PATH = '/home/ubuntu/mapWebsite/app/static/'
 
 @app.route('/')
 @app.route('/index')
-@app.before_first_request
 def index():
+    return render_template('index.html', title='Map Home')
+
+@app.before_first_request
+def init_map():
     # create map, populate with markers, and offset overlapping markers
     m = folium.Map(min_zoom=2, max_zoom=14, zoom_start=2)
     location_list = []
@@ -28,8 +31,6 @@ def index():
         location_list.append(marker.location)
         marker.add_to(m)
     m.save('./app/templates/map.html')
-
-    return render_template('index.html', title='Map Home')
 
 
 def get_filenames() -> list:
