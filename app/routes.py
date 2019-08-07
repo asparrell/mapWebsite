@@ -76,12 +76,12 @@ def make_file_to_coord_dict(file: str) -> dict:
             coords = format_coords(coordinates[0])
             filename_to_coordinates[file] = coords
         else:
-            filename_to_coordinates[file] = [0.0, 0.0]
+            filename_to_coordinates[file] = [90.0, 0.0]
     elif file_code in place_code_to_lat_long:
         location = place_code_to_lat_long[file_code]  # Otherwise get GPS data from filename
         filename_to_coordinates[file] = location
     else:
-        filename_to_coordinates[file] = [0.0, 0.0]
+        filename_to_coordinates[file] = [90.0, 0.0]
 
     return filename_to_coordinates
 
