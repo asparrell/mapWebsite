@@ -50,21 +50,22 @@ def get_filenames() -> list:
     return filenames
 
 
-def extract_filename_location() -> dict:
+# def extract_filename_location(file_code: str) -> dict:
     # Gets latlong coordinates from filename for each file
-    filenames = get_filenames()
-    filename_to_latlong = {}
-    for file in filenames:
-        file_code = file[:file.find(' ')]
-        latlong = place_code_to_lat_long[file_code]
-        filename_to_latlong[file] = latlong
-    return filename_to_latlong
+    #filenames = get_filenames()
+    #filename_to_latlong = {}
+    # for file in filenames:
+        #file_code = file[:file.find(' ')]
+        #latlong = place_code_to_lat_long[file_code]
+        #filename_to_latlong[file] = latlong
+    # return filename_to_latlong
 
 
 def make_file_to_coord_dict(file: str) -> dict:
     # Extracts coordinate strings from each file and store them in a dictionary with their file
     filename_to_coordinates = {}
     path = PATH + file
+    file_code = file[:file.find(' ')]
     with open(path) as f:
         file_data = f.read()
     start_index = file_data.find('oordinates')  # Uses 'oordinates' because the case of 'c' varies between files
@@ -73,10 +74,11 @@ def make_file_to_coord_dict(file: str) -> dict:
         coordinates = re.findall(r'[-]?\d+\.?\d*, [-]?\d+\.?\d*', data_slice)
         coords = format_coords(coordinates[0])
         filename_to_coordinates[file] = coords
+    elif file_code in place_code_to_lat_long:
+        location = place_code_to_lat_long[file_code]  # Otherwise get GPS data from filename
+        filename_to_coordinates[file] = location
     else:
-        filename_to_latlong = extract_filename_location()  # Otherwise get GPS data from filename
-        location=filename_to_latlong[file]
-        filename_to_coordinates[file]=location
+        filename_to_coordinates[file] = [0.0, 0.0]
 
     return filename_to_coordinates
 
