@@ -72,6 +72,7 @@ def make_file_to_coord_dict(file: str) -> dict:
     if start_index != -1:  # If there is a GPS coordinate in the file
         data_slice = file_data[start_index: start_index + 50]
         coordinates = re.findall(r'[-]?\d+\.?\d*, [-]?\d+\.?\d*', data_slice)
+        print(coordinates)
         coords = format_coords(coordinates[0])
         filename_to_coordinates[file] = coords
     elif file_code in place_code_to_lat_long:
