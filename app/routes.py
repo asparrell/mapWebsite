@@ -20,6 +20,7 @@ def index():
     # Creates main page with information provided from init_map()
     return render_template('index.html', title='Map Home')
 
+
 # Runs before first request so that the page only needs to load once
 @app.before_first_request
 def init_map():
@@ -50,17 +51,6 @@ def get_filenames() -> list:
     return filenames
 
 
-# def extract_filename_location(file_code: str) -> dict:
-    # Gets latlong coordinates from filename for each file
-    #filenames = get_filenames()
-    #filename_to_latlong = {}
-    # for file in filenames:
-        #file_code = file[:file.find(' ')]
-        #latlong = place_code_to_lat_long[file_code]
-        #filename_to_latlong[file] = latlong
-    # return filename_to_latlong
-
-
 def make_file_to_coord_dict(file: str) -> dict:
     # Extracts coordinate strings from each file and store them in a dictionary with their file
     filename_to_coordinates = {}
@@ -84,6 +74,7 @@ def make_file_to_coord_dict(file: str) -> dict:
         filename_to_coordinates[file] = [90.0, 0.0]
 
     return filename_to_coordinates
+
 
 def format_coords(coordinates: str) -> list:
     # Changes coordinate string to float list
